@@ -1,0 +1,28 @@
+version: 2
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env:
+      - name: SPRING_PROFILES_ACTIVE
+        value: prod
+      - name: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: postgres
+          property: url
+      - name: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: postgres
+          property: username
+      - name: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: postgres
+          property: password
+      - name: SPRING_AI_OLLAMA_BASE_URL
+        sync: false
+    healthcheck:
+      path: /actuator/health
+      interval: 15s
+      timeout: 5s
+      retries: 3

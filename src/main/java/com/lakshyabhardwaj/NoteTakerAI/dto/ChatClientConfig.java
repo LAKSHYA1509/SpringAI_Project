@@ -29,6 +29,6 @@ public class ChatClientConfig {
     @Primary
     public OllamaChatClient ollamaChatClient(OllamaApi ollamaApi) {
         return new OllamaChatClient(ollamaApi)
-            .withModel(model);  // Lower temperature for more focused responses
+            .withModel(model);
     }
 }
