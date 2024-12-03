@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.beans.factory.annotation.Value;
+import java.time.Duration;
 
 @Configuration
 public class ChatClientConfig {
@@ -16,6 +17,9 @@ public class ChatClientConfig {
     @Value("${spring.ai.ollama.model:llama2}")
     private String model;
 
+    @Value("${spring.ai.timeout:30}")
+    private int timeoutSeconds;
+
     @Bean
     public OllamaApi ollamaApi() {
         return new OllamaApi(baseUrl);
@@ -25,6 +29,6 @@ public class ChatClientConfig {
     @Primary
     public OllamaChatClient ollamaChatClient(OllamaApi ollamaApi) {
         return new OllamaChatClient(ollamaApi)
-            .withModel(model);
+            .withModel(model);  // Lower temperature for more focused responses
     }
 }

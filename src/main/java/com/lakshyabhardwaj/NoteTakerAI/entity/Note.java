@@ -24,8 +24,13 @@ public class Note {
     private Long id;
     @Column(unique = true)
     private String title;
+
+    @Column(columnDefinition = "TEXT")
     private String content;
+
+    @Column(columnDefinition = "TEXT")
     private String summary;
+
     private String createdDate;
     private String updatedDate;
 

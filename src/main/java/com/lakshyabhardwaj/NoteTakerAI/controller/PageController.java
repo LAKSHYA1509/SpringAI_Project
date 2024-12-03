@@ -47,7 +47,10 @@ public class PageController {
     public ResponseEntity<Map<String, String>> summarizeNote(@RequestBody Map<String, String> request) {
         String content = request.get("content");
         try {
-            String prompt = String.format("Please summarize the following text: %s", content);
+            String prompt = String.format(
+                "Provide a brief 2-3 sentence summary of the following text. Be direct and concise: %s", 
+                content
+            );
             String summary = ollamaChatClient.call(prompt);
             return ResponseEntity.ok(Map.of("summary", summary));
         } catch (Exception e) {
